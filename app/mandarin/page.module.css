@@ -1,0 +1,418 @@
+/* /app/study/page.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Change this from center to flex-start */
+  justify-content: flex-start; 
+  min-height: 100vh;
+  width: 100%;
+  /* Add more padding to the top to push the title and card down */
+  padding: 60px 20px; 
+  background-color: #fdfaf5;
+  box-sizing: border-box;
+}
+
+.title {
+  color: #4a90e2;
+  font-size: clamp(1.5rem, 5vw, 2.5rem); /* Shrinks on mobile, grows on laptop */
+  margin-bottom: 1rem;
+}
+
+.progressContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+/* 🐾 The Responsive Card 🐾 */
+.flashcard {
+  position: relative;
+  background-color: #fff9ed;
+  border: 4px solid #f8e1a7;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 450px;
+  /* Use a fixed height so it doesn't grow when content appears inside */
+  height: 480px; 
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 0 #f0d58e;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+/* Hover effect for the whole card */
+.flashcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 0 #f0d58e;
+}
+
+/* The Hanzi character (animated when appearing) */
+/* The Hanzi size will now adapt */
+.hanzi {
+  font-size: clamp(3rem, 10vh, 6rem);
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* The Pinyin/English section (appears when flipped) */
+.revealedContent {
+  margin-top: 20px;
+  border-top: 2px dashed #f8e1a7;
+  padding-top: 20px;
+  width: 80%; /* Don't make the dashed line go full width, looks cuter! */
+  
+  /* ADD THESE TO CENTER INNER TEXT */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+}
+
+.pinyin {
+  color: #d32f2f;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 0 0 10px 0;
+}
+
+.english {
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+}
+
+.listenButton {
+  background-color: #fff;
+  color: #4a90e2;
+  border: 2px solid #4a90e2;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.listenButton:hover {
+  background-color: #4a90e2;
+  color: #fff;
+}
+
+/* 🟢 Grading Buttons 🟢 */
+/* Responsive adjustment for the container */
+.gradingContainer {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gradingContainer .gotItBtn {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* Update the existing .gotItBtn and .forgotBtn styles */
+.forgotBtn, .gotItBtn {
+  font-family: inherit;
+  /* clamp(min, preferred, max) makes font size fluid */
+  font-size: clamp(1rem, 4vw, 1.2rem); 
+  font-weight: bold;
+  
+  /* Use viewport-based padding for a better feel on mobile */
+  padding: clamp(10px, 3vh, 15px) clamp(20px, 5vw, 30px);
+  
+  border: none;
+  border-radius: 50px; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+
+  /* KEY CHANGES: Responsive width */
+  width: 100%;             /* Fills the container on small screens */
+  max-width: 280px;        /* Limits size on larger screens (tablets/laptops) */
+  display: inline-block;
+}
+
+/* Red "Forgot" Button with 3D shadow */
+.forgotBtn {
+  background-color: #ff6b6b;
+  color: white;
+  box-shadow: 0 6px 0 #e05252;
+}
+
+.forgotBtn:active, .gotItBtn:active {
+  transform: translateY(3px);
+  box-shadow: 0 3px 0 #37b24d; /* Adjust shadow color for the specific button */
+}
+
+/* Green "Got it!" Button with 3D shadow */
+.gotItBtn {
+  background-color: #51cf66; 
+  color: white;
+  box-shadow: 0 6px 0 #37b24d;
+}
+
+/* 🎬 KEYFRAME ANIMATIONS 🎬 */
+
+/* Pop-in effect for the Hanzi */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Add these to your existing CSS file */
+
+.lessonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+  .lessonGrid { grid-template-columns: repeat(3, 1fr); } /* 3 on laptop */
+}
+
+.lessonCard {
+  background-color: #fff;
+  border: 3px solid #f8e1a7;
+  border-radius: 15px;
+  padding: 20px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #4a90e2;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.lessonCard:hover {
+  transform: scale(1.05);
+  background-color: #fff9ed;
+}
+
+.lessonCard small {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.backBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.backBtn:hover {
+  color: #4a90e2;
+}
+
+/* Animation for the floating celebration icon */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Celebration Card: Responsive & Adaptive */
+.celebrationCard {
+  background: white;
+  width: 90vw;
+  max-width: 500px;
+  padding: clamp(20px, 5vh, 40px);
+  border-radius: 40px;
+  border: 4px solid #51cf66;
+  text-align: center;
+  box-shadow: 0 10px 0 #37b24d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stickerAnim {
+  font-size: clamp(3rem, 8vh, 5rem);
+  margin-bottom: 10px;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Make sure buttons fit inside the card on mobile */
+.celebrationCard .gotItBtn,
+.celebrationCard .backBtn {
+  width: 80%;
+  max-width: 260px;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+}
+
+/* Sticker image: Make it scale with the screen */
+.celebrationCard img {
+  width: min(180px, 25vw);  /* 25% of viewport width, max 180px */
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* Ensure title doesn't break layout */
+.celebrationCard .title {
+  font-size: clamp(1.5rem, 4vh, 2rem);
+  margin-bottom: 5px;
+}
+
+/* 1. The Perspective Wrapper */
+.flashcardContainer {
+  perspective: 1000px;
+  width: 90vw;          /* 90% of viewport width */
+  max-width: 550px;     /* but not wider than 550px */
+  height: 55vh;         /* 55% of viewport height */
+  max-height: 500px;
+  min-height: 320px;    /* never too small */
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* 2. The Inner Flip Box */
+.flashcardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* 3. The Flip Trigger */
+.isFlipped .flashcardInner {
+  transform: rotateY(180deg);
+}
+
+/* 4. Common Face Styles */
+.cardFront, .cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  border: 4px solid #f8e1a7;
+  background-color: #fff9ed;
+  box-shadow: 0 10px 0 #f0d58e;
+}
+
+/* 5. Position the Back Face */
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+.hintText {
+  color: #aaa;
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.listenButton {
+  background-color: #fff;
+  color: #4a90e2;
+  border: 2px solid #4a90e2;
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Add a pulse animation when the audio is active */
+.audioPlaying {
+  animation: pulse 1s infinite;
+  background-color: #4a90e2;
+  color: white;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); box-shadow: 0 0 10px rgba(74, 144, 226, 0.5); }
+  100% { transform: scale(1); }
+}
+
+.scoreWrapper {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popIn 0.3s ease-out;
+}
+
+.scoreCircle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 4px solid #51cf66; /* Green border */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f0fff4;
+}
+
+.scoreNumber {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2f855a;
+  line-height: 1;
+}
+
+.scoreLabel {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: #2f855a;
+}
+
+.speechFeedback {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #555;
+}
+
