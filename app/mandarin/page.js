@@ -306,7 +306,8 @@ const handleForgot = () => {
         Got it ✨
       </button>
       <button className={styles.forgotBtn} onClick={handleForgot}>
-        Forgot 😵
+        Forgotttttttttttt 😵
+
       </button>
     </div>
   )}    </div>
