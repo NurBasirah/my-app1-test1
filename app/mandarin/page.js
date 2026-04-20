@@ -303,7 +303,7 @@ const handleForgot = () => {
         ← Previous
       </button>
       <button className={styles.gotItBtn} onClick={handleNext}>
-        Got it ✨
+        Got ittttt ✨
       </button>
       <button className={styles.forgotBtn} onClick={handleForgot}>
         Forgotttttttttttt 😵
